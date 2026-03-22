@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import useGlobalReducer from "../hooks/useGlobalReducer.jsx";
 
-import { CharacterCard } from "../components/CharacterCard.jsx";
 
 export const Home = () => {
 
@@ -40,23 +39,18 @@ export const Home = () => {
 			<div className="d-flex flex-row flex-wrap gap-2">
 					{
 						peoples.map((people) => (
-							<div className="card-body border border-white p-2" key={people.uid}>
+							<div className="card-body border border-white p-2" style={{width:"220px"}}
+							key={people.uid}>
 								<h5 className="card-title">{people.name}</h5>
 								<p className="card-text">Gender: {people.gender}</p>
 								<p className="card-text">Age: {people.birth_year}</p>
-								<a href="#" className="btn btn-primary">Go somewhere</a>
+								<a href="#" className="btn btn-light btn-outline border">More Details</a>
 							</div>
 						))
 					}
 			</div>
 
-			<div>
-				{/*<CharacterCard />*/}
-
-
-
-			</div>
-
+		
 			<div>
 				<p>Aqui va el Carrusell con las armas</p>
 			</div>
