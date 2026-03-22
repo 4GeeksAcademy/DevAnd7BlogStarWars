@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import useGlobalReducer from "../hooks/useGlobalReducer.jsx";
+import { Link } from "react-router-dom";
 
 
 export const Home = () => {
@@ -44,7 +45,9 @@ export const Home = () => {
 								<h5 className="card-title">{people.name}</h5>
 								<p className="card-text">Gender: {people.gender}</p>
 								<p className="card-text">Age: {people.birth_year}</p>
-								<a href="#" className="btn btn-light btn-outline border">More Details</a>
+								<Link to={`/single/${people.uid}`} className="btn btn-light btn-outline border">
+									More Details
+								</Link>
 							</div>
 						))
 					}
