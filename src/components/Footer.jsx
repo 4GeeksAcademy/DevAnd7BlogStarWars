@@ -1,7 +1,5 @@
 export const Footer = () => (
-	<footer className="footer mt-auto py-3 text-center">
-		<p>
-			Aqui va el footer
-		</p>
-	</footer>
+	<footer className="footer d-flex justify-content-center align-items-center bg-dark text-white p-1">
+  <p className="m-0">Blog de Star Wars creado por DevAnd7. xD</p>
+</footer>
 );

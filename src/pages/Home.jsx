@@ -1,10 +1,11 @@
-import rigoImageUrl from "../assets/img/rigo-baby.jpg";
+import { useState } from "react";
 import useGlobalReducer from "../hooks/useGlobalReducer.jsx";
 
 export const Home = () => {
 
   const {store, dispatch} =useGlobalReducer()
 
+  const [people, setPeople] = useState([]);
 	return (
 		<div className="d-flex flex-column align-items-center">
 			<div>
