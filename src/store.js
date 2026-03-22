@@ -1,8 +1,6 @@
 export const initialStore = () => {
   return {
-    message: null,
-    todos: [],
-    people: [],
+    peoples: [],
     favorites: []
   };
 };
@@ -10,27 +8,17 @@ export const initialStore = () => {
 export default function storeReducer(store, action = {}) {
   switch (action.type) {
 
-    case "add_task": {
-      const { id, color } = action.payload;
+    case "set_peoples": {
+      const { peoples} = action.payload;
 
-      return {
+      return{
         ...store,
-        todos: store.todos.map((todo) =>
-          todo.id === id ? { ...todo, background: color } : todo
-        )
-      };
-    }
-
-    case "set_people": {
-      const { people } = action.payload;
-
-      return {
-        ...store,
-        people: [
-          ...store.people,  
-          ...people         
+        peoples: [
+          ...store.peoples,
+          ...peoples
         ]
-      };
+      }
+      
     }
 
     default:
