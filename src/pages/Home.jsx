@@ -6,11 +6,18 @@ export const Home = () => {
   const {store, dispatch} =useGlobalReducer()
 
 	return (
-		<div className="text-center mt-5">
-			<h1>Hello Rigo!!</h1>
-			<p>
-				<img src={rigoImageUrl} />
-			</p>
+		<div className="d-flex flex-column align-items-center">
+			<div>
+			<p>Aqui va el Carrusell con los personajes</p>
+			</div>
+			
+			<div>
+			<p>Aqui va el Carrusell con las armas</p>
+			</div>
+
+			<div>
+			<p>Aqui va el Carrusell con los planetas</p>
+			</div>
 		</div>
 	);
 }; 
