@@ -38,10 +38,9 @@ export const Home = () => {
 	return (
 		<section className="text-center">
 			<div className="d-flex flex-row flex-wrap gap-2">
-				<div className="card bg-dark text-white">
 					{
 						peoples.map((people) => (
-							<div className="card-body" key={people.uid}>
+							<div className="card-body border border-white p-2" key={people.uid}>
 								<h5 className="card-title">{people.name}</h5>
 								<p className="card-text">Gender: {people.gender}</p>
 								<p className="card-text">Age: {people.birth_year}</p>
@@ -49,7 +48,6 @@ export const Home = () => {
 							</div>
 						))
 					}
-				</div>
 			</div>
 
 			<div>

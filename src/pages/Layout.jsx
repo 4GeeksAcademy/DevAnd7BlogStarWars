@@ -10,7 +10,10 @@ export const Layout = () => {
             <div className="container stars text-white">
 
             <Navbar />
+            <div className="my-2">
+
                 <Outlet />
+            </div>
             <Footer />
 
             </div>
