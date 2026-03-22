@@ -1,27 +1,62 @@
 import { useEffect, useState } from "react";
 import useGlobalReducer from "../hooks/useGlobalReducer.jsx";
 
+import { CharacterCard } from "../components/CharacterCard.jsx";
+
 export const Home = () => {
 
 	const { store, dispatch } = useGlobalReducer()
 
-	const [people, setPeople] = useState([]);
+	const [peoples, setPeople] = useState([]);
 
 	useEffect(() => {
-		const fetchPeople = async () => fetch("https://www.swapi.tech/api/people");
+		const fetchPeople = async () => {
+			const res = await fetch("https://www.swapi.tech/api/people");
+			const data = await res.json();
 
-		fetchPeople().then(response => response.json()).then(respjson => {
-			const respPeople =respjson.results;
-			setPeople(respPeople);
-		});
-	}, [])
+			const detailedPeople = await Promise.all(
+				data.results.map(async (p) => {
+					const res2 = await fetch(p.url);
+					const data2 = await res2.json();
 
-console.log(people);
+					return {
+						...p,
+						birth_year: data2.result.properties.birth_year
+					};
+				})
+			);
+
+			setPeople(detailedPeople);
+		};
+
+		fetchPeople();
+	}, []);
+
+
+	console.log(peoples);
 
 	return (
-		<div className="d-flex flex-column align-items-center">
+		<section className="text-center">
+			<div className="d-flex flex-row flex-wrap gap-2">
+				<div className="card bg-dark text-white">
+					{
+						peoples.map((people) => (
+							<div className="card-body" key={people.uid}>
+								<h5 className="card-title">{people.name}</h5>
+								<p className="card-text">Gender: {people.gender}</p>
+								<p className="card-text">Age: {people.birth_year}</p>
+								<a href="#" className="btn btn-primary">Go somewhere</a>
+							</div>
+						))
+					}
+				</div>
+			</div>
+
 			<div>
-				<p>Aqui va el Carrusell con los personajes</p>
+				{/*<CharacterCard />*/}
+
+
+
 			</div>
 
 			<div>
@@ -31,6 +66,6 @@ console.log(people);
 			<div>
 				<p>Aqui va el Carrusell con los planetas</p>
 			</div>
-		</div>
+		</section>
 	);
 }; 

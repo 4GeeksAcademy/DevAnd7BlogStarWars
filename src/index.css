@@ -1,7 +1,7 @@
 body {
   margin: 0;
   background: black;
-  overflow: hidden;
+  overflow-y: auto;
 }
 
 .stars {
