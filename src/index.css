@@ -1,0 +1,17 @@
+body {
+  margin: 0;
+  background: black;
+  overflow: hidden;
+}
+
+.stars {
+  width: 100vw;
+  height: 100vh;
+  background: url("https://www.transparenttextures.com/patterns/stardust.png");
+  animation: moveStars 20s linear infinite;
+}
+
+@keyframes moveStars {
+  from { background-position: 0 0; }
+  to   { background-position: 0 1000px; }
+}
