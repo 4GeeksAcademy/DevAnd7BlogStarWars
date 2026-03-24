@@ -10,15 +10,15 @@ export const initialStore = () => {
 export default function storeReducer(store, action = {}) {
   switch (action.type) {
 
+    // ================= PEOPLE =================
     case "set_peoples": {
-      const { peoples } = action.payload;
-
       return {
         ...store,
-        peoples: peoples
+        peoples: action.payload.peoples
       };
     }
 
+    // ================= VEHICLES =================
     case "set_vehicles": {
       return {
         ...store,
@@ -26,6 +26,7 @@ export default function storeReducer(store, action = {}) {
       };
     }
 
+    // ================= PLANETS =================
     case "set_planets": {
       return {
         ...store,
@@ -33,6 +34,7 @@ export default function storeReducer(store, action = {}) {
       };
     }
 
+    // ================= FAVORITES =================
     case "ADD_FAVORITE": {
       return {
         ...store,
@@ -44,12 +46,13 @@ export default function storeReducer(store, action = {}) {
       return {
         ...store,
         favorites: store.favorites.filter(
-          item => !(item.uid === action.payload.uid && item.tipo === action.payload.tipo)
+          item =>
+            !(item.uid === action.payload.uid && item.tipo === action.payload.tipo)
         )
       };
     }
 
     default:
-      throw Error("Unknown action.");
+      return store;
   }
 }

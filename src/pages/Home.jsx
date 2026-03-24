@@ -4,16 +4,17 @@ import Card from "../components/Card";
 
 export const Home = () => {
   const { store, dispatch } = useGlobalReducer();
-
   const hasFetched = useRef(false);
 
   useEffect(() => {
     if (hasFetched.current) return;
     hasFetched.current = true;
 
-    // ================= PEOPLE =================
+    // ================= PEOPLE (CON DETALLES) =================
     const fetchPeople = async () => {
       try {
+        if (store.peoples.length > 0) return;
+
         const res = await fetch("https://www.swapi.tech/api/people");
         if (!res.ok) throw new Error("Error API people");
         const data = await res.json();
@@ -40,28 +41,18 @@ export const Home = () => {
       }
     };
 
-    // ================= VEHICLES =================
+    // ================= VEHICLES (SIN DETALLES) =================
     const fetchVehicles = async () => {
       try {
+        if (store.vehicles.length > 0) return;
+
         const res = await fetch("https://www.swapi.tech/api/vehicles");
         if (!res.ok) throw new Error("Error API vehicles");
         const data = await res.json();
 
-        const detalles = await Promise.all(
-          data.results.map(item =>
-            fetch(item.url)
-              .then(res => res.json())
-              .then(data => ({
-                uid: item.uid,
-                name: item.name,
-                ...data.result.properties
-              }))
-          )
-        );
-
         dispatch({
           type: "set_vehicles",
-          payload: { vehicles: detalles }
+          payload: { vehicles: data.results }
         });
 
       } catch (error) {
@@ -69,28 +60,18 @@ export const Home = () => {
       }
     };
 
-    // ================= PLANETS =================
+    // ================= PLANETS (SIN DETALLES) =================
     const fetchPlanets = async () => {
       try {
+        if (store.planets.length > 0) return;
+
         const res = await fetch("https://www.swapi.tech/api/planets");
         if (!res.ok) throw new Error("Error API planets");
         const data = await res.json();
 
-        const detalles = await Promise.all(
-          data.results.map(item =>
-            fetch(item.url)
-              .then(res => res.json())
-              .then(data => ({
-                uid: item.uid,
-                name: item.name,
-                ...data.result.properties
-              }))
-          )
-        );
-
         dispatch({
           type: "set_planets",
-          payload: { planets: detalles }
+          payload: { planets: data.results }
         });
 
       } catch (error) {
@@ -98,16 +79,15 @@ export const Home = () => {
       }
     };
 
-    // Ejecutar todo
     fetchPeople();
     fetchVehicles();
     fetchPlanets();
 
-  }, [dispatch]);
+  }, []);
 
   return (
     <div>
-      <h1>Personajes Star Wars</h1>
+      <h1>Star Wars Blog</h1>
 
       {/* PEOPLE */}
       <h2>People</h2>
