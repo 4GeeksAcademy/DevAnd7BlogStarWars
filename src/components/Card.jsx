@@ -1,25 +1,27 @@
 import useGlobalReducer from "../hooks/useGlobalReducer";
 import { useNavigate } from "react-router-dom";
 
-const Card = ({ nombre, uid, birth, gender }) => {
+const Card = ({ nombre, uid, tipo, birth, gender }) => {
 
   const { store, dispatch } = useGlobalReducer();
 
-  const esFavorito = store.favorites.some(fav => fav.uid === uid);
+  const esFavorito = store.favorites.some(
+  fav => fav.uid === uid && fav.tipo === tipo
+);
 
   const toggleFavorito = () => {
-    if (esFavorito) {
-      dispatch({
-        type: "REMOVE_FAVORITE",
-        payload: { uid, nombre }
-      });
-    } else {
-      dispatch({
-        type: "ADD_FAVORITE",
-        payload: { uid, nombre }
-      });
-    }
-  };
+  if (esFavorito) {
+    dispatch({
+      type: "REMOVE_FAVORITE",
+      payload: { uid, tipo }
+    });
+  } else {
+    dispatch({
+      type: "ADD_FAVORITE",
+      payload: { uid, nombre, tipo }
+    });
+  }
+};
 
   const navigate = useNavigate();
 
@@ -27,20 +29,37 @@ const Card = ({ nombre, uid, birth, gender }) => {
     navigate(`/single/${uid}`);
   };
 
-
   return (
     <div className="card m-2" style={{ width: "18rem" }}>
-
       <div className="card-body bg-dark text-white">
 
         <h5 className="card-title text-warning">{nombre}</h5>
 
-        <p className="card-text">
-          <strong>Birth Year:</strong> {birth} <br />
-          <strong>Gender:</strong> {gender}
-        </p>
+        {/* 🔹 PEOPLE */}
+        {tipo === "people" && (
+          <p className="card-text">
+            <strong>Birth Year:</strong> {birth} <br />
+            <strong>Gender:</strong> {gender}
+          </p>
+        )}
 
-        <div className="d-flex justify-content-between align-items-center">
+        {/* 🔹 VEHICLES */}
+        {tipo === "vehicle" && (
+          <p className="card-text">
+            <strong>Model:</strong> {birth} <br />
+            <strong>Class:</strong> {gender}
+          </p>
+        )}
+
+        {/* 🔹 PLANETS */}
+        {tipo === "planet" && (
+          <p className="card-text">
+            <strong>Climate:</strong> {birth} <br />
+            <strong>Terrain:</strong> {gender}
+          </p>
+        )}
+
+        <div className="d-flex justify-content-between align-items-center mt-3">
 
           <button
             className="btn btn-outline-light"
