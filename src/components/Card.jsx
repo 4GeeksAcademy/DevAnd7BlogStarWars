@@ -1,4 +1,5 @@
 import useGlobalReducer from "../hooks/useGlobalReducer";
+import { useNavigate } from "react-router-dom";
 
 const Card = ({ nombre, uid }) => {
 
@@ -20,10 +21,16 @@ const Card = ({ nombre, uid }) => {
     }
   };
 
-  console.log("UID:", uid);
+  const navigate = useNavigate();
+
+  const verMas = () => {
+    navigate(`/single/${uid}`);
+  };
+
+
   return (
     <div className="card m-2" style={{ width: "18rem" }}>
-      
+
       <div className="card-body bg-dark text-white">
 
         <h5 className="card-title text-warning">{nombre}</h5>
@@ -34,7 +41,10 @@ const Card = ({ nombre, uid }) => {
 
         <div className="d-flex justify-content-between align-items-center">
 
-          <button className="btn btn-outline-light">
+          <button
+            className="btn btn-outline-light"
+            onClick={verMas}
+          >
             Ver más
           </button>
 

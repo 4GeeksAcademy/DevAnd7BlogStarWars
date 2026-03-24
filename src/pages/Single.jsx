@@ -3,20 +3,20 @@ import { useParams } from "react-router-dom";
 
 export const Single = () => {
 
-  const { uidPeople } = useParams();
+  const { uid } = useParams();
   const [people, setPeople] = useState(null);
   const [planet, setPlanet] = useState(null);
   const [films, setFilms] = useState([]);
 
   useEffect(() => {
     const fetchPeople = async () => {
-      const resp = await fetch(`https://www.swapi.tech/api/people/${uidPeople}`);
+      const resp = await fetch(`https://www.swapi.tech/api/people/${uid}`);
       const data = await resp.json();
       setPeople(data.result.properties);
     };
 
     fetchPeople();
-  }, [uidPeople]);
+  }, [uid]);
 
   useEffect(() => {
     if (!people) return;
@@ -45,7 +45,7 @@ export const Single = () => {
         <div className="row g-0">
           <div className="col-md-4">
             <img 
-              src={`https://starwars-visualguide.com/assets/img/characters/${uidPeople}.jpg`} 
+              src={`https://starwars-visualguide.com/assets/img/characters/${uid}.jpg`} 
               alt={people.name} 
               className="img-fluid"
             />
