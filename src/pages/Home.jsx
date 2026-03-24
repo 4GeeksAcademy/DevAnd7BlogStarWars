@@ -13,11 +13,25 @@ export const Home = () => {
           if (!res.ok) throw new Error("Error API");
           return res.json();
         })
-        .then(data => {
+        .then(async data => {
+
+          const detalles = await Promise.all(
+            data.results.map(personaje =>
+              fetch(personaje.url)
+                .then(res => res.json())
+                .then(data => ({
+                  uid: personaje.uid,
+                  name: personaje.name,
+                  ...data.result.properties
+                }))
+            )
+          );
+
           dispatch({
             type: "set_peoples",
-            payload: { peoples: data.results }
+            payload: { peoples: detalles }
           });
+
         })
         .catch(error => console.log(error));
     }
@@ -33,6 +47,8 @@ export const Home = () => {
             key={personaje.uid}
             nombre={personaje.name}
             uid={personaje.uid}
+            birth={personaje.birth_year}
+            gender={personaje.gender}
           />
         ))}
       </div>

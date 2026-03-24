@@ -1,7 +1,7 @@
 import useGlobalReducer from "../hooks/useGlobalReducer";
 import { useNavigate } from "react-router-dom";
 
-const Card = ({ nombre, uid }) => {
+const Card = ({ nombre, uid, birth, gender }) => {
 
   const { store, dispatch } = useGlobalReducer();
 
@@ -36,7 +36,8 @@ const Card = ({ nombre, uid }) => {
         <h5 className="card-title text-warning">{nombre}</h5>
 
         <p className="card-text">
-          Personaje de Star Wars
+          <strong>Birth Year:</strong> {birth} <br />
+          <strong>Gender:</strong> {gender}
         </p>
 
         <div className="d-flex justify-content-between align-items-center">
