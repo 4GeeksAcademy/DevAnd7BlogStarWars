@@ -1,37 +1,52 @@
-import { useState } from "react";
+import useGlobalReducer from "../hooks/useGlobalReducer";
 
-const Card = ({ nombre }) => {
+const Card = ({ nombre, uid }) => {
 
-  const [favorito, setFavorito] = useState(false);
+  const { store, dispatch } = useGlobalReducer();
+
+  const esFavorito = store.favorites.some(fav => fav.uid === uid);
 
   const toggleFavorito = () => {
-    setFavorito(prev => !prev);
+    if (esFavorito) {
+      dispatch({
+        type: "REMOVE_FAVORITE",
+        payload: { uid, nombre }
+      });
+    } else {
+      dispatch({
+        type: "ADD_FAVORITE",
+        payload: { uid, nombre }
+      });
+    }
   };
 
-
+  console.log("UID:", uid);
   return (
     <div className="card m-2" style={{ width: "18rem" }}>
-      {/*<img src="..." className="card-img-top" alt="Personaje ${nombre}">*/}
-
+      
       <div className="card-body bg-dark text-white">
+
         <h5 className="card-title text-warning">{nombre}</h5>
 
         <p className="card-text">
           Personaje de Star Wars
         </p>
 
-        <div className="d-flex justify-content-between">
-          <button className="btn btn-dark border-light ">
+        <div className="d-flex justify-content-between align-items-center">
+
+          <button className="btn btn-outline-light">
             Ver más
           </button>
 
           <button
             className="btn btn-warning"
-            onClick={toggleFavorito}>
-            {favorito ? "❤️" : "🤍"}
+            onClick={toggleFavorito}
+          >
+            {esFavorito ? "❤️" : "🤍"}
           </button>
 
         </div>
+
       </div>
     </div>
   );

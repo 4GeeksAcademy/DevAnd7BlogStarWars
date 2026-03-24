@@ -23,9 +23,11 @@ export const Home = () => {
       <div className="d-flex justify-content-center flex-wrap gap-2">
         {personajes.map((personaje) => (
           <Card
-          key={personaje.uid}
-          nombre={personaje.name} />
-          ))}
+            key={personaje.uid}
+            nombre={personaje.name}
+            uid={personaje.uid}
+          />
+        ))}
       </div>
 
     </div>
