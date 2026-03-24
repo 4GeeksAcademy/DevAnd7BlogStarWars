@@ -1,3 +1,5 @@
+import 'bootstrap-icons/font/bootstrap-icons.css';
+
 import { Outlet } from "react-router-dom/dist"
 import ScrollToTop from "../components/ScrollToTop"
 import { Navbar } from "../components/Navbar"
@@ -8,13 +10,13 @@ export const Layout = () => {
     return (
         <ScrollToTop>
             <div className="container stars text-white">
+                <Navbar />
 
-            <Navbar />
-            <div className="my-2">
+                <div className="my-2">
+                    <Outlet />
+                </div>
 
-                <Outlet />
-            </div>
-            <Footer />
+                <Footer />
 
             </div>
         </ScrollToTop>
