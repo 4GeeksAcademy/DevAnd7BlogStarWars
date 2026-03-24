@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 
+import Card from "../components/Card";
+
 export const Home = () => {
 
   const [personajes, setPersonajes] = useState([]);
@@ -18,11 +20,13 @@ export const Home = () => {
     <div>
       <h1>Personajes Star Wars</h1>
 
-      {personajes.map((personaje, index) => (
-        <div key={index}>
-          <h3>{personaje.name}</h3>
-        </div>
-      ))}
+      <div style={{ display: "flex", flexWrap: "wrap" }}>
+        {personajes.map((personaje) => (
+          <Card
+          key={personaje.uid}
+          nombre={personaje.name} />
+          ))}
+      </div>
 
     </div>
   );
