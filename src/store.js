@@ -13,10 +13,7 @@ export default function storeReducer(store, action = {}) {
 
       return {
         ...store,
-        peoples: [
-          ...store.peoples,
-          ...peoples
-        ]
+        peoples: peoples
       };
     }
 

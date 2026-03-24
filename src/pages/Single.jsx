@@ -1,10 +1,13 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
+import { useNavigate } from "react-router-dom";
+
 export const Single = () => {
 
   const { uid } = useParams();
   const [people, setPeople] = useState(null);
+  const navigate = useNavigate();
   const [planet, setPlanet] = useState(null);
   const [films, setFilms] = useState([]);
 
@@ -44,9 +47,9 @@ export const Single = () => {
       <div className="card bg-dark text-white mb-3">
         <div className="row g-0">
           <div className="col-md-4">
-            <img 
-              src={`https://starwars-visualguide.com/assets/img/characters/${uid}.jpg`} 
-              alt={people.name} 
+            <img
+              src={`https://starwars-visualguide.com/assets/img/characters/${uid}.jpg`}
+              alt={people.name}
               className="img-fluid"
             />
           </div>
@@ -67,7 +70,7 @@ export const Single = () => {
 
               <p><strong>Films:</strong></p>
               <ul>
-                {films.length === 0 
+                {films.length === 0
                   ? <li>Cargando...</li>
                   : films.map((film, i) => <li key={i}>{film}</li>)
                 }
@@ -75,6 +78,11 @@ export const Single = () => {
 
             </div>
           </div>
+
+          <button className="btn btn-outline-light" onClick={() => navigate(-1)}>
+            Volver
+          </button>
+          
         </div>
       </div>
     </section>

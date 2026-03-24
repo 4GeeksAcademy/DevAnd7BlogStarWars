@@ -1,19 +1,26 @@
-import { useEffect, useState } from "react";
-
+import { useEffect } from "react";
+import useGlobalReducer from "../hooks/useGlobalReducer";
 import Card from "../components/Card";
 
 export const Home = () => {
 
-  const [personajes, setPersonajes] = useState([]);
+  const { store, dispatch } = useGlobalReducer();
 
   useEffect(() => {
-    fetch("https://www.swapi.tech/api/people")
-      .then(res => res.json())
-      .then(data => {
-        console.log(data.results);
-        setPersonajes(data.results);
-      })
-      .catch(error => console.log(error));
+    if (store.peoples.length === 0) {
+      fetch("https://www.swapi.tech/api/people")
+        .then(res => {
+          if (!res.ok) throw new Error("Error API");
+          return res.json();
+        })
+        .then(data => {
+          dispatch({
+            type: "set_peoples",
+            payload: { peoples: data.results }
+          });
+        })
+        .catch(error => console.log(error));
+    }
   }, []);
 
   return (
@@ -21,7 +28,7 @@ export const Home = () => {
       <h1>Personajes Star Wars</h1>
 
       <div className="d-flex justify-content-center flex-wrap gap-2">
-        {personajes.map((personaje) => (
+        {store.peoples.map((personaje) => (
           <Card
             key={personaje.uid}
             nombre={personaje.name}
@@ -29,7 +36,6 @@ export const Home = () => {
           />
         ))}
       </div>
-
     </div>
   );
 };
