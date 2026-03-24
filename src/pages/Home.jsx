@@ -20,7 +20,7 @@ export const Home = () => {
     <div>
       <h1>Personajes Star Wars</h1>
 
-      <div style={{ display: "flex", flexWrap: "wrap" }}>
+      <div className="d-flex justify-content-center flex-wrap gap-2">
         {personajes.map((personaje) => (
           <Card
           key={personaje.uid}
