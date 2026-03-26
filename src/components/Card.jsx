@@ -2,31 +2,36 @@ import useGlobalReducer from "../hooks/useGlobalReducer";
 import { useNavigate } from "react-router-dom";
 
 const Card = ({ nombre, uid, tipo, birth, gender }) => {
-
   const { store, dispatch } = useGlobalReducer();
 
   const esFavorito = store.favorites.some(
-  fav => fav.uid === uid && fav.tipo === tipo
-);
+    fav => fav.uid === uid && fav.tipo === tipo
+  );
 
   const toggleFavorito = () => {
-  if (esFavorito) {
-    dispatch({
-      type: "REMOVE_FAVORITE",
-      payload: { uid, tipo }
-    });
-  } else {
-    dispatch({
-      type: "ADD_FAVORITE",
-      payload: { uid, nombre, tipo }
-    });
-  }
-};
+    if (esFavorito) {
+      dispatch({
+        type: "REMOVE_FAVORITE",
+        payload: { uid, tipo }
+      });
+    } else {
+      dispatch({
+        type: "ADD_FAVORITE",
+        payload: { uid, nombre, tipo }
+      });
+    }
+  };
 
   const navigate = useNavigate();
 
+  const tipoMap = {
+    people: "people",
+    vehicle: "vehicles",
+    planet: "planets"
+  };
+
   const verMas = () => {
-    navigate(`/single/${uid}`);
+    navigate(`/single/${tipoMap[tipo]}/${uid}`);
   };
 
   return (
