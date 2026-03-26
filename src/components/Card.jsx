@@ -1,8 +1,27 @@
 import useGlobalReducer from "../hooks/useGlobalReducer";
 import { useNavigate } from "react-router-dom";
 
-const Card = ({ nombre, uid, tipo, birth, gender }) => {
+const Card = ({
+  nombre,
+  uid,
+  tipo,
+  birth,
+  gender,
+  model,
+  vehicle_class,
+  manufacturer,
+  cost_in_credits,
+  length,
+  crew,
+  passengers,
+  climate,
+  terrain,
+  population,
+  gravity,
+  diameter
+}) => {
   const { store, dispatch } = useGlobalReducer();
+  const navigate = useNavigate();
 
   const esFavorito = store.favorites.some(
     fav => fav.uid === uid && fav.tipo === tipo
@@ -22,8 +41,6 @@ const Card = ({ nombre, uid, tipo, birth, gender }) => {
     }
   };
 
-  const navigate = useNavigate();
-
   const tipoMap = {
     people: "people",
     vehicle: "vehicles",
@@ -40,7 +57,7 @@ const Card = ({ nombre, uid, tipo, birth, gender }) => {
 
         <h5 className="card-title text-warning">{nombre}</h5>
 
-        {/* 🔹 PEOPLE */}
+        {/* PEOPLE */}
         {tipo === "people" && (
           <p className="card-text">
             <strong>Birth Year:</strong> {birth} <br />
@@ -48,38 +65,30 @@ const Card = ({ nombre, uid, tipo, birth, gender }) => {
           </p>
         )}
 
-        {/* 🔹 VEHICLES */}
+        {/* VEHICLES */}
         {tipo === "vehicle" && (
           <p className="card-text">
-            <strong>Model:</strong> {birth} <br />
-            <strong>Class:</strong> {gender}
+            <strong>Model:</strong> {model} <br />
+            <strong>Manufacturer:</strong> {manufacturer} <br />
           </p>
         )}
 
-        {/* 🔹 PLANETS */}
+        {/* PLANETS */}
         {tipo === "planet" && (
           <p className="card-text">
-            <strong>Climate:</strong> {birth} <br />
-            <strong>Terrain:</strong> {gender}
+            <strong>Climate:</strong> {climate} <br />
+            <strong>Population:</strong> {population} <br />
           </p>
         )}
 
         <div className="d-flex justify-content-between align-items-center mt-3">
-
-          <button
-            className="btn btn-outline-light"
-            onClick={verMas}
-          >
+          <button className="btn btn-outline-light" onClick={verMas}>
             Ver más
           </button>
 
-          <button
-            className="btn btn-warning"
-            onClick={toggleFavorito}
-          >
+          <button className="btn btn-warning" onClick={toggleFavorito}>
             {esFavorito ? "❤️" : "🤍"}
           </button>
-
         </div>
 
       </div>

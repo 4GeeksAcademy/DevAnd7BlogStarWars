@@ -50,15 +50,28 @@ export const Home = () => {
         if (!res.ok) throw new Error("Error API vehicles");
         const data = await res.json();
 
+        const detalles = await Promise.all(
+          data.results.map(vehiculo =>
+            fetch(vehiculo.url)
+              .then(res => res.json())
+              .then(data => ({
+                uid: vehiculo.uid,
+                name: vehiculo.name,
+                ...data.result.properties
+              }))
+          )
+        );
+
         dispatch({
           type: "set_vehicles",
-          payload: { vehicles: data.results }
+          payload: { vehicles: detalles }
         });
 
       } catch (error) {
         console.log(error);
       }
     };
+
 
     // ================= PLANETS (SIN DETALLES) =================
     const fetchPlanets = async () => {
@@ -69,9 +82,21 @@ export const Home = () => {
         if (!res.ok) throw new Error("Error API planets");
         const data = await res.json();
 
+        const detalles = await Promise.all(
+          data.results.map(planeta =>
+            fetch(planeta.url)
+              .then(res => res.json())
+              .then(data => ({
+                uid: planeta.uid,
+                name: planeta.name,
+                ...data.result.properties
+              }))
+          )
+        );
+
         dispatch({
           type: "set_planets",
-          payload: { planets: data.results }
+          payload: { planets: detalles }
         });
 
       } catch (error) {
@@ -113,6 +138,8 @@ export const Home = () => {
             nombre={vehiculo.name}
             uid={vehiculo.uid}
             tipo="vehicle"
+            model={vehiculo.model}
+            manufacturer={vehiculo.manufacturer}
           />
         ))}
       </div>
@@ -126,10 +153,11 @@ export const Home = () => {
             nombre={planeta.name}
             uid={planeta.uid}
             tipo="planet"
+            climate={planeta.climate}
+            population={planeta.population}
           />
         ))}
       </div>
-
     </div>
   );
 };

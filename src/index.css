@@ -7,7 +7,7 @@ body {
 
 .stars {
   width: 100vw;
-  height: 100vh;
+  height: auto;
   background: url("https://www.transparenttextures.com/patterns/stardust.png");
   animation: moveStars 20s linear infinite;
 }

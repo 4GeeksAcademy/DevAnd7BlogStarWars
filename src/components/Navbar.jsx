@@ -9,7 +9,7 @@ export const Navbar = () => {
       <div className="container-fluid">
 
         {/* LOGO + TITULO */}
-        <a className="navbar-brand text-white" href="#">
+        <div className="navbar-brand text-white">
           <div className="d-flex align-items-center gap-3">
             <img
               className="logotipo"
@@ -20,7 +20,7 @@ export const Navbar = () => {
               Blog de Star Wars
             </h1>
           </div>
-        </a>
+        </div>
 
         {/* DROPDOWN FAVORITOS */}
         <div className="dropdown">
