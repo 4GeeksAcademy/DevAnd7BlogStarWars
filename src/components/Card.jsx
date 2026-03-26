@@ -42,7 +42,7 @@ const Card = ({
   };
 
   const tipoMap = {
-    people: "people",
+    people: "characters",
     vehicle: "vehicles",
     planet: "planets"
   };
@@ -54,11 +54,11 @@ const Card = ({
   return (
     <div className="card m-2" style={{ width: "18rem" }}>
       <div className="card-body bg-dark text-white">
-
+        <img className="card-img-top" src={`https://raw.githubusercontent.com/dsmora/star-wars-guide/refs/heads/master/build/assets/img/${tipo}/${uid}.jpg`} alt={nombre} />
         <h5 className="card-title text-warning">{nombre}</h5>
 
         {/* PEOPLE */}
-        {tipo === "people" && (
+        {tipo === "characters" && (
           <p className="card-text">
             <strong>Birth Year:</strong> {birth} <br />
             <strong>Gender:</strong> {gender}

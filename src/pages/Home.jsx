@@ -110,6 +110,10 @@ export const Home = () => {
 
   }, []);
 
+
+console.log(store.vehicles);
+
+
   return (
     <div>
       <h1>Star Wars Blog</h1>
@@ -122,7 +126,7 @@ export const Home = () => {
             key={personaje.uid}
             nombre={personaje.name}
             uid={personaje.uid}
-            tipo="people"
+            tipo="characters"
             birth={personaje.birth_year}
             gender={personaje.gender}
           />
@@ -137,7 +141,7 @@ export const Home = () => {
             key={vehiculo.uid}
             nombre={vehiculo.name}
             uid={vehiculo.uid}
-            tipo="vehicle"
+            tipo="vehicles"
             model={vehiculo.model}
             manufacturer={vehiculo.manufacturer}
           />
@@ -152,7 +156,7 @@ export const Home = () => {
             key={planeta.uid}
             nombre={planeta.name}
             uid={planeta.uid}
-            tipo="planet"
+            tipo="planets"
             climate={planeta.climate}
             population={planeta.population}
           />

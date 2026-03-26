@@ -80,8 +80,7 @@ export const Single = () => {
           {/* IMAGEN */}
           <div className="col-md-4">
             <img
-              src={`https://starwars-visualguide.com/assets/img/${tipo === "people" ? "characters" : tipo}/${uid}.jpg`}
-              alt={data.name}
+            
               className="img-fluid"
             />
           </div>
